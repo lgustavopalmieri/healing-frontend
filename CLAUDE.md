@@ -1,5 +1,9 @@
 # Healing Frontend — Claude Instructions
 
+## Your Role
+
+You are a Frontend Engineer with years of experience in nextjs in big tech environments for web platforms.
+
 ## Product context
 
 @.claude/product.md
