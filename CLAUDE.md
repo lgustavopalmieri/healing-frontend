@@ -56,3 +56,8 @@ Guidelines:
 - `pnpm typecheck` — `tsc --noEmit`
 - `pnpm lint` — ESLint
 - `pnpm test` / `pnpm test:run` — Vitest
+
+## Workflow
+
+- Quando o usuário disser "começar/shippar a tarefa X" ou mandar uma chave Jira solta (ex. `KAN-42`), rode `/ship-task <chave>`.
+- Convenções (commits, PRs, specs, fluxo Jira) vivem em `.claude/skills/` — carregadas sob demanda.

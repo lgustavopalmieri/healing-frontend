@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "_comment": "Template — rode `scripts/init-claude.js` (ou substitua /home/lgustavopalmieri/healing/healing-frontend manualmente pelo caminho absoluto do projeto) e salve como settings.local.json. Veja aula 10 do curso sobre o porquê de usarmos /home/lgustavopalmieri/healing/healing-frontend aqui.",
+  "_comment": "Template — rode `scripts/init-claude.js` (ou substitua $PWD manualmente pelo caminho absoluto do projeto) e salve como settings.local.json. Veja aula 10 do curso sobre o porquê de usarmos $PWD aqui.",
   "permissions": {
     "allow": [
       "Bash(git status)",
@@ -36,8 +36,8 @@
       {
         "matcher": "Bash",
         "hooks": [
-          { "type": "command", "command": "/home/lgustavopalmieri/healing/healing-frontend/.claude/hooks/validate-commit-message.sh" },
-          { "type": "command", "command": "/home/lgustavopalmieri/healing/healing-frontend/.claude/hooks/block-direct-main-commit.sh" }
+          { "type": "command", "command": "$PWD/.claude/hooks/validate-commit-message.sh" },
+          { "type": "command", "command": "$PWD/.claude/hooks/block-direct-main-commit.sh" }
         ]
       }
     ],
@@ -45,7 +45,7 @@
       {
         "matcher": "Write|Edit",
         "hooks": [
-          { "type": "command", "command": "/home/lgustavopalmieri/healing/healing-frontend/.claude/hooks/post-edit-format.sh" }
+          { "type": "command", "command": "$PWD/.claude/hooks/post-edit-format.sh" }
         ]
       }
     ]
