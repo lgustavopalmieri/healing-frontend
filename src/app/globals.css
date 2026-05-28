@@ -4,18 +4,18 @@
 /*
  * Design tokens — two-layer strategy.
  *
- * 1. Primitives: raw, theme-agnostic values (neutral scale, feedback palette).
- *    No reference to UI role, theme, or persona. Defined once in :root and
- *    shared across themes.
+ * 1. Primitives: raw, theme-agnostic values (neutral scale, feedback palette,
+ *    brand ramps). No reference to UI role, theme, or persona. Defined once in
+ *    :root and shared across themes.
  * 2. Semantics: role-based tokens (--background, --primary, --destructive…)
- *    that consume primitives via var() and may be overridden per theme
- *    (e.g. .dark) or persona.
+ *    that consume primitives via var() and live inside per-persona theme
+ *    blocks ([data-theme="patient"], [data-theme="specialist"]).
  *
- * Consumers should reference semantic tokens, not primitives, so theme
- * overrides flow through automatically.
+ * Consumers should reference semantic tokens, not primitives, so persona
+ * overrides flow through automatically. A theme attribute must be present on
+ * an ancestor (set on the route group layouts in KAN-25) for semantics to
+ * resolve — there is intentionally no :root semantic fallback.
  */
-
-@custom-variant dark (&:is(.dark *));
 
 :root {
   /* Primitives — neutral scale (slate-based, OKLCH) */
@@ -70,50 +70,62 @@
   /* Primitive — warm off-white (patient surfaces); cool off-white reuses --neutral-50 */
   --warm-white: oklch(0.994 0.006 84.6);
 
-  /* Semantic tokens (shadcn) */
-  --radius: 0.625rem;
-
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
 }
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+/* Semantic tokens — patient persona (warm, welcoming) */
+[data-theme="patient"] {
+  --radius: 1rem;
+
+  --background: var(--warm-white);
+  --foreground: var(--neutral-900);
+  --card: var(--warm-white);
+  --card-foreground: var(--neutral-900);
+  --popover: var(--warm-white);
+  --popover-foreground: var(--neutral-900);
+  --primary: var(--welcoming-500);
+  --primary-foreground: var(--neutral-50);
+  --secondary: var(--welcoming-100);
+  --secondary-foreground: var(--welcoming-900);
+  --muted: var(--neutral-100);
+  --muted-foreground: var(--neutral-500);
+  --accent: var(--accent-violet-500);
+  --accent-foreground: var(--neutral-50);
+  --success: var(--success-500);
+  --warning: var(--warning-500);
+  --danger: var(--danger-500);
+  --destructive: var(--danger-500);
+  --destructive-foreground: var(--neutral-50);
+  --border: var(--neutral-200);
+  --input: var(--neutral-200);
+  --ring: var(--welcoming-500);
+}
+
+/* Semantic tokens — specialist persona (clinical, sober) */
+[data-theme="specialist"] {
+  --radius: 0.5rem;
+
+  --background: var(--neutral-50);
+  --foreground: var(--neutral-900);
+  --card: var(--neutral-50);
+  --card-foreground: var(--neutral-900);
+  --popover: var(--neutral-50);
+  --popover-foreground: var(--neutral-900);
+  --primary: var(--clinical-500);
+  --primary-foreground: var(--neutral-50);
+  --secondary: var(--clinical-100);
+  --secondary-foreground: var(--clinical-900);
+  --muted: var(--neutral-100);
+  --muted-foreground: var(--neutral-500);
+  --accent: var(--accent-violet-500);
+  --accent-foreground: var(--neutral-50);
+  --success: var(--success-500);
+  --warning: var(--warning-500);
+  --danger: var(--danger-500);
+  --destructive: var(--danger-500);
+  --destructive-foreground: var(--neutral-50);
+  --border: var(--clinical-100);
+  --input: var(--clinical-100);
+  --ring: var(--clinical-500);
 }
 
 @theme inline {
@@ -138,6 +150,9 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
