@@ -34,6 +34,6 @@ describe("root layout font wiring", () => {
   });
 
   it("binds Inter to the --font-inter variable", () => {
-    expect(layout).toMatch(/Inter\(\{[^}]*variable:\s*"--font-inter"/s);
+    expect(layout).toMatch(/Inter\(\{[^}]*variable:\s*"--font-inter"/);
   });
 });
