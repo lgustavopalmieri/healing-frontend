@@ -12,11 +12,14 @@ import {
 import { Input } from "@/shared/ui/input";
 
 /**
- * TEMPORARY smoke route (KAN-25).
+ * TEMPORARY smoke route (KAN-25), served at /theme-preview.
  *
  * Renders the patient and specialist themes side by side so the persona
  * tokens can be eyeballed during the design-system epic. It lives outside the
  * route groups, so each panel declares its own data-theme inline.
+ *
+ * Note: the route is /theme-preview (not /__themes) because App Router treats
+ * any folder prefixed with "_" as a private, non-routable folder.
  *
  * Remove this route at the end of the epic (KAN-6 / KAN-5). It is gated to
  * non-production environments via notFound() below.
